@@ -3,9 +3,21 @@ import React from 'react';
 const ReleaseZone = ({ releaseZoneRef }) => {
   return (
     <div
-      className="release-zone w-full left-0 right-0 bottom-0 h-40 flex items-center justify-center text-xl"
+      className="release-zone"
       ref={releaseZoneRef}
-      style={{ borderRadius: 0 }}
+      style={{
+        width: '82.5vw', // 1.65x of 50vw (previous full width was 50vw, now 82.5vw)
+        left: '50%',
+        transform: 'translateX(-50%)',
+        borderRadius: 0,
+        position: 'absolute',
+        bottom: 0,
+        height: '160px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '1.25rem',
+      }}
     >
       Release Zone
     </div>

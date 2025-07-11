@@ -9,9 +9,9 @@ const NavigationTargets = ({ navBoxesRef, onStart }) => {
 
   return (
     <div className="nav-targets">
-      <div className="nav-box projects" data-target="projects">Projects</div>
-      <div className="nav-box resume" data-target="resume">Resume</div>
-      <div className="nav-box about" data-target="about">About Me</div>
+      <div className="nav-box projects" data-target="projects" style={{ left: 120, top: 50 }}>Projects</div>
+      <div className="nav-box resume" data-target="resume" style={{ right: 120, top: 50 }}>Resume</div>
+      <div className="nav-box about" data-target="about" style={{ left: '50%', transform: 'translateX(-50%)', top: 50 }}>About Me</div>
     </div>
   );
 };
