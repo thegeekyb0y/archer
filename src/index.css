@@ -1,0 +1,533 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Navigation target boxes */
+.nav-targets {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.nav-box {
+    position: absolute;
+    width: 200px;
+    height: 120px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff88;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.nav-box.active {
+    background: rgba(0, 255, 136, 0.3);
+    border-color: #00ff88;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+    transform: scale(1.1);
+}
+
+.nav-box.projects {
+    top: 50px;
+    left: 50px;
+}
+
+.nav-box.resume {
+    top: 50px;
+    right: 50px;
+}
+
+.nav-box.about {
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bow-container {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    z-index: 10;
+}
+
+.bow {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Left limb - proper recurve design */
+.bow-limb-left {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 20px;
+    background: linear-gradient(90deg, #8B4513 0%, #D2691E 30%, #CD853F 70%, #8B4513 100%);
+    border-radius: 10px;
+    transform-origin: right center;
+    transition: all 0.3s ease;
+}
+
+.bow-limb-left::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 12px;
+    background: linear-gradient(90deg, #654321, #8B4513);
+    border-radius: 50px;
+    transform: rotate(15deg);
+}
+
+.bow-limb-left::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    background: #444;
+    border-radius: 50%;
+    border: 2px solid #666;
+}
+
+/* Right limb - proper recurve design */
+.bow-limb-right {
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 20px;
+    background: linear-gradient(90deg, #8B4513 0%, #CD853F 30%, #D2691E 70%, #8B4513 100%);
+    border-radius: 10px;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.bow-limb-right::before {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 12px;
+    background: linear-gradient(90deg, #8B4513, #654321);
+    border-radius: 50px;
+    transform: rotate(-15deg);
+}
+
+.bow-limb-right::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    background: #444;
+    border-radius: 50%;
+    border: 2px solid #666;
+}
+
+/* Bow grip/riser (center) */
+.bow-grip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 120px;
+    background: linear-gradient(180deg, #654321 0%, #8B4513 30%, #A0522D 50%, #8B4513 70%, #654321 100%);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.1);
+}
+
+.bow-grip::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 60px;
+    background: linear-gradient(180deg, #A0522D, #8B4513);
+    border-radius: 17px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Arrow rest */
+.arrow-rest {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -50%);
+    width: 30px;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+/* Bow string with proper curve */
+.bow-string {
+    position: absolute;
+    top: 50%;
+    left: 65px;
+    right: 65px;
+    height: 2px;
+    background: linear-gradient(90deg, #fff 0%, #e6e6e6 50%, #fff 100%);
+    box-shadow: 0 0 8px 2px #fff8, 0 0 2px #fff;
+    filter: drop-shadow(0 0 8px #fff8);
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    z-index: 2;
+}
+
+.bow-string::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(255,255,255,0.8);
+}
+
+.bow-string::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(255,255,255,0.8);
+}
+
+/* Vertical arrow pointing upward */
+.arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 180px;
+    background: linear-gradient(180deg, #D2691E 0%, #8B4513 70%, #654321 100%);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    z-index: 15;
+    transform-origin: center bottom;
+    box-shadow: 0 8px 32px #000a, 0 0 8px #fff2;
+}
+
+.arrow-head {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 30px solid #C0C0C0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.arrow-head::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 15px solid #A0A0A0;
+}
+
+.arrow-fletching {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 25px solid #FF4500;
+}
+
+.arrow-fletching::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 20px solid #FF6347;
+}
+
+.arrow-nock {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 12px;
+    background: linear-gradient(180deg, #bfa76a 0%, #654321 100%);
+    border-radius: 50%;
+    border: 2px solid #888;
+    box-shadow: 0 2px 8px #0008, 0 0 8px #fff4, inset 0 1px 2px #fff8;
+    cursor: grab;
+    transition: box-shadow 0.2s;
+}
+
+.arrow-nock:active {
+    cursor: grabbing;
+    box-shadow: 0 4px 16px #fff8, 0 0 16px #fff8;
+}
+
+/* Dragging states */
+.dragging .bow-string {
+    background: linear-gradient(90deg, #fff 0%, #ffffcc 50%, #fff 100%);
+    box-shadow: 0 0 16px 4px #fff, 0 0 8px #ffffcc;
+    filter: drop-shadow(0 0 16px #fff) drop-shadow(0 0 8px #ffffcc);
+}
+
+.dragging .bow-limb-left {
+    transform: translateY(-50%) rotate(-13deg) scaleY(1.08);
+    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+.dragging .bow-limb-right {
+    transform: translateY(-50%) rotate(13deg) scaleY(1.08);
+    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Dotted guideline */
+.guideline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 2px dashed #00ff88;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+    transform-origin: bottom;
+}
+
+.guideline.visible {
+    opacity: 0.8;
+}
+
+/* Release zone */
+.release-zone {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 120px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 2px dashed rgba(255, 0, 0, 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #ff4444;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.release-zone.visible {
+    opacity: 1;
+}
+
+.release-zone.active {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: #ff4444;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+/* Page sections */
+.page-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+}
+
+.page-section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-section h1 {
+    font-size: 3rem;
+    color: #00ff88;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.page-section .content {
+    max-width: 800px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.page-section .content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.back-button {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: rgba(0, 255, 136, 0.2);
+    border: 2px solid #00ff88;
+    color: #00ff88;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(0, 255, 136, 0.4);
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bow-container {
+        width: 400px;
+        height: 250px;
+    }
+    
+    .bow-limb-left,
+    .bow-limb-right {
+        width: 140px;
+    }
+    
+    .arrow {
+        height: 140px;
+    }
+    
+    .bow-grip {
+        height: 90px;
+    }
+    
+    .nav-box {
+        width: 150px;
+        height: 80px;
+        font-size: 1.2rem;
+    }
+} 
+
+/* Explosion overlay */
+.explosion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  opacity: 0.95;
+  z-index: 2000;
+  pointer-events: none;
+  animation: fade-explosion 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes fade-explosion {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Shake effect */
+.shake {
+  animation: shake-screen 0.2s cubic-bezier(0.36,0.07,0.19,0.97) infinite;
+}
+@keyframes shake-screen {
+  0% { transform: translate(0px, 0px); }
+  20% { transform: translate(-4px, 2px); }
+  40% { transform: translate(4px, -2px); }
+  60% { transform: translate(-2px, 4px); }
+  80% { transform: translate(2px, -4px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+/* Remove guideline */
+.guideline, .guideline.visible { display: none !important; } 
+
+/* SVG lower thread beautification */
+.bow-container svg polyline {
+    filter: drop-shadow(0 0 8px #fff8) drop-shadow(0 0 2px #fff);
+    stroke: #fff;
+    stroke-width: 2.5;
+    opacity: 0.95;
+} 
