@@ -1,6 +1,7 @@
-# Interactive Vertical Arrow Navigation
+# Interactive Vertical Arrow Navigation (VibeCoded)
 
-A React-based interactive portfolio website featuring a bow and arrow navigation system. Users can drag the arrow to aim at different sections and release to navigate.
+
+A React-based interactive website featuring a bow and arrow navigation system. Users can drag the arrow to aim at different sections and release to navigate.
 
 ## Features
 
