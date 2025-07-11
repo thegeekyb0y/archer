@@ -30,7 +30,7 @@ A React-based interactive website featuring a bow and arrow navigation system. U
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/thegeekyb0y/archer
 cd dhanushbaan
 ```
 
